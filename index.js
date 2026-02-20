@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT;
 
 // import del router dei film
-const bookRouter = require("./routers/bookRouter");
+const moviesRouter = require("./routers/moviesRouter");
 
 // import del middelware di gestione errore interno 500
 const errorsHandler = require("./middlewares/errorsHandler");
