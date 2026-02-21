@@ -36,6 +36,8 @@ function show(req, res) {
 
       // aggiungiamo a oggetto movie la prop per le reviews
       movie.reviews = reviewsArr;
+      // add url immagini nel dettaglio film
+      movie.img_url = `${req.protocol}://${req.get("host")}/${movie.image}`;
 
       res.json(movie);
     });
