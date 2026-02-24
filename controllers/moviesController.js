@@ -7,7 +7,14 @@ function index(req, res) {
 
   connection.query(sql, (err, results) => {
     if (err) return res.status(500).json({ error: "Database query failed" });
-    res.json(results);
+    res.json(
+      results.map((movie) => {
+        return {
+          ...movie,
+          image_url: `${process.env.APP_URL}/${movie.image}`,
+        };
+      }),
+    );
   });
 }
 
@@ -37,7 +44,8 @@ function show(req, res) {
       // aggiungiamo a oggetto movie la prop per le reviews
       movie.reviews = reviewsArr;
       // add url immagini nel dettaglio film
-      movie.img_url = `${req.protocol}://${req.get("host")}/${movie.image}`;
+      // movie.img_url = `${req.protocol}://${req.get("host")}/${movie.image}`;
+      movie.image_url = `${process.env.APP_URL}/${movie.image}`;
 
       res.json(movie);
     });
