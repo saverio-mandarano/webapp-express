@@ -3,7 +3,7 @@ const router = express.Router();
 
 // import e destrutturazione di moviesController
 const moviesController = require("../controllers/moviesController");
-const { index, show, store, update, modify, destroy } = moviesController;
+const { index, show, storeReview, update, modify, destroy } = moviesController;
 
 // rotta di index
 router.get("/", index);
@@ -12,7 +12,7 @@ router.get("/", index);
 router.get("/:id", show);
 
 // store: creazione nuovo post
-router.post("/", store);
+router.post("/:id/reviews", storeReview);
 
 // update: modifica integrale del post
 router.put("/:id", update);

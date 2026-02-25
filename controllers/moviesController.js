@@ -52,9 +52,32 @@ function show(req, res) {
   });
 }
 
-function store(req, res) {}
+//store
+function storeReview(req, res) {
+  const { id } = req.params;
+  const { name, vote, text } = req.body;
+
+  const sql = `
+      INSERT INTO reviews (movie_id, name, vote, text)
+      VALUES (?, ?, ?, ?)
+    `;
+
+  connection.query(sql, [id, name, vote, text], (err, result) => {
+    if (err) return res.status(500).json({ error: "Insert failed" });
+
+    res.status(201);
+    res.json({
+      message: "Review added",
+      movie_id: id,
+      name,
+      vote,
+      text,
+    });
+  });
+}
+
 function update(req, res) {}
 function modify(req, res) {}
 function destroy(req, res) {}
 
-module.exports = { index, show, store, update, modify, destroy };
+module.exports = { index, show, storeReview, update, modify, destroy };
